@@ -1,6 +1,7 @@
 {
   "type": "module",
   "scripts": {
+    "build": "tsup",
     "md2notion": "tsx ./src/cli/md2notion.ts",
     "fetchList": "tsx ./src/cli/fetchNoteLists.ts"
   },
@@ -21,6 +22,7 @@
     "@types/glob": "^8.1.0",
     "@types/node": "^24.10.0",
     "@types/yargs": "^17.0.34",
+    "tsup": "^8.5.1",
     "typescript": "^5.9.3"
   }
 }
