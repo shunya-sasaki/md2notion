@@ -1,3 +1,4 @@
+import licensePlugin from "esbuild-plugin-license";
 import { defineConfig } from "tsup";
 
 export default defineConfig({
@@ -17,4 +18,28 @@ export default defineConfig({
       "@": "./src",
     };
   },
+  esbuildPlugins: [
+    licensePlugin({
+      thirdParty: {
+        output: {
+          file: "../NOTICE",
+          template(dependencies) {
+            return dependencies
+              .map((dep) => {
+                const name = `${dep.packageJson.name}@${dep.packageJson.version}`;
+                const license = dep.packageJson.license || "Unknown";
+                const text = dep.licenseText || "No license text provided.";
+                const title = `${name} (${license})`;
+                const titleLength = title.length;
+                const separator = "=".repeat(titleLength + 2);
+
+                return `${separator}\n ${title}\n${separator}\n\n${text}\n\n`;
+              })
+              .join("\n");
+          },
+        },
+        includePrivate: false,
+      },
+    }),
+  ],
 });
