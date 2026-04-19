@@ -1,6 +1,7 @@
 # md2notion
 
 ![Notion](https://img.shields.io/badge/Notion-000000?logo=notion&labelColor=gray&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&labelColor=gray&logoColor=white)
 ![Markdown](https://img.shields.io/badge/Markdown-000000?logo=markdown&labelColor=gray&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&labelColor=gray&logoColor=white)
 ![MIT](https://img.shields.io/github/license/shunya-sasaki/md2notion)
@@ -9,7 +10,10 @@ Upload local Markdown files to Databases in Notion.
 
 ## 📦 Requirements
 
+You can run this app using either:
+
 - Node.js
+- Docker
 
 ## ⚙️ Setup
 
@@ -52,7 +56,7 @@ https://www.notion.so/your-name/<database-id>?v=<view-identifies>
 ```
 
 > [!NOTE]
-> This app need only database ID, so you can ignore the view identifies part.
+> This app only needs the database ID, so you can ignore the view identifier part.
 
 ### Local document directory
 
@@ -111,7 +115,7 @@ For example, if you have a Notion database with a property "Language" and local 
 
 ```json
 {
-  "localDir": "/Users/yourname/notes",
+  "localDir": "/app/notes",
   "databases": {
     "languages": {
       "id": "a1234567890abcdef1234567890abcdef12",
@@ -140,9 +144,24 @@ For example, if you have a Notion database with a property "Language" and local 
 
 ### Run md2notion
 
-#### Command line
+You can run this tool in several ways depending on your environment.
 
-Run the following command to upload local Markdown files to Notion:
+#### Option 1: Using Docker
+
+You don't need to install Node.js. Just use Docker to run the CLI tool.
+Mount your local `config.json` and the directory containing your Markdown files.
+
+```sh
+docker run -v ./config.json:/app/config.json:ro -v <your-doc-dir-path>:/app/notes:ro -e NOTION_TOKEN=$NOTION_TOKEN ghcr.io/shunya-sasaki/md2notion:latest
+```
+
+> [!NOTE]
+> When running Docker, you have to set `localDir` in the config file
+> to the mount point in the container (e.g. `/app/notes`).
+
+#### Option2: Runing via Node.js
+
+If you prefer to run it locally, build the project and execute it via Node.js.
 
 ---
 
@@ -165,18 +184,6 @@ pnpm run md2notion
 After running the command, the app will read the local Markdown files
 and upload them to the corresponding Notion database based on the config file!
 
-#### Docker
-
-Run the following command to upload local Markdown files to Notion using Docker:
-
-```sh
-docker run -v ./config.json:/app/config.json:ro -v <your-doc-dir-path>:/app/target:ro -e NOTION_TOKEN=$NOTION_TOKEN ghcr.io/shunya-sasaki/md2notion:latest
-```
-
-> [!WARNING]
-> When running Docker, you have to set `localDir` in the config file
-> to the mount point in the container (e.g. `/app/target`).
-
 ## 📚 Reference
 
 - [Notion integration](https://www.notion.com/integrations)
@@ -186,4 +193,4 @@ docker run -v ./config.json:/app/config.json:ro -v <your-doc-dir-path>:/app/targ
 
 MIT license.
 
-See [LICENSE](./LICENSE) for more details.
+See [LICENSE](./LICENSE) and [NOTICE](./NOTICE) for more details.
