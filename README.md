@@ -25,7 +25,7 @@ Upload local Markdown files to Databases in Notion.
 
 ### Save API key
 
-This app read API key from `NOTION_API_KEY` environment variable.
+This app read API key from `NOTION_TOKEN` environment variable.
 You can set it in your shell profile (e.g. `.bashrc`, `.zshrc`):
 
 ## 🚀 Usage
@@ -140,6 +140,8 @@ For example, if you have a Notion database with a property "Language" and local 
 
 ### Run md2notion
 
+#### Command line
+
 Run the following command to upload local Markdown files to Notion:
 
 ---
@@ -162,6 +164,18 @@ pnpm run md2notion
 
 After running the command, the app will read the local Markdown files
 and upload them to the corresponding Notion database based on the config file!
+
+#### Docker
+
+Run the following command to upload local Markdown files to Notion using Docker:
+
+```sh
+docker run -v ./config.json:/app/config.json:ro -v <your-doc-dir-path>:/app/target:ro -e NOTION_TOKEN=$NOTION_TOKEN ghcr.io/shunya-sasaki/md2notion:latest
+```
+
+> [!WARNING]
+> When running Docker, you have to set `localDir` in the config file
+> to the mount point in the container (e.g. `/app/target`).
 
 ## 📚 Reference
 
