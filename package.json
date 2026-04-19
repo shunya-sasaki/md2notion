@@ -1,0 +1,26 @@
+{
+  "type": "module",
+  "scripts": {
+    "md2notion": "tsx ./src/cli/md2notion.ts",
+    "fetchList": "tsx ./src/cli/fetchNoteLists.ts"
+  },
+  "dependencies": {
+    "@notionhq/client": "^4.0.1",
+    "@types/mdast": "^4.0.4",
+    "@types/unist": "^3.0.3",
+    "glob": "^13.0.0",
+    "remark-gfm": "^4.0.1",
+    "remark-math": "^6.0.0",
+    "remark-parse": "^11.0.0",
+    "tsx": "^4.20.6",
+    "unified": "^11.0.5",
+    "unist-util-visit": "^5.0.0",
+    "yargs": "^18.0.0"
+  },
+  "devDependencies": {
+    "@types/glob": "^8.1.0",
+    "@types/node": "^24.10.0",
+    "@types/yargs": "^17.0.34",
+    "typescript": "^5.9.3"
+  }
+}
