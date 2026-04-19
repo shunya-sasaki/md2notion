@@ -24,8 +24,8 @@
           mkShell {
             packages = [
               nodeVersion
-              nodeVersion.pkgs.yarn
-              nodeVersion.pkgs.pnpm
+              pkgs.yarn
+              pkgs.pnpm
             ];
             shellHook = ''
               echo "Node.js ${nodeVersion.version} environment"
